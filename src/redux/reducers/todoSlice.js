@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { id } from '../../utils/generateId'
 
 export const todoSlice = createSlice({
     name: 'todos',
@@ -7,20 +8,22 @@ export const todoSlice = createSlice({
     reducers: {
         addTodo: (state = todoSlice.initialState, action) => {
             const todo = {
-                id: new Date(),
+                id: id(),
                 title: action.payload.title,
                 complete: false
             }
 
             state.push(todo)
+
+
         },
 
-        toogleComplete:(state, action) => {
+        toogleComplete: (state, action) => {
             const index = state.findIndex((todo) => todo.id === action.payload.id);
-			state[index].completed = action.payload.completed
+            state[ index ].completed = action.payload.completed
         },
 
-        removeTodo:(state, action) => {
+        removeTodo: (state, action) => {
             return state.filter((todo) => todo.id !== action.payload.id)
         }
     }
